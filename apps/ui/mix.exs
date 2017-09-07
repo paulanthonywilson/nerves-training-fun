@@ -13,6 +13,7 @@ defmodule Ui.Mixfile do
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
+      aliases: aliases(Mix.env),
       deps: deps()
     ]
   end
@@ -27,13 +28,9 @@ defmodule Ui.Mixfile do
     ]
   end
 
-  # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_),     do: ["lib"]
 
-  # Specifies your project dependencies.
-  #
-  # Type `mix help deps` for examples and options.
   defp deps do
     [
       {:phoenix, "~> 1.3.0"},
@@ -44,4 +41,11 @@ defmodule Ui.Mixfile do
       {:cowboy, "~> 1.0"}
     ]
   end
+
+  def aliases(:prod) do
+    [
+      "compile": ["compile", "brunch_build", "phx.digest"]
+    ]
+  end
+  def aliases(_), do: []
 end
