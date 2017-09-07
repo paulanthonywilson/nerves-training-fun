@@ -1,0 +1,6 @@
+/* This file is for your main application css. */
+
+textarea#message_input {
+  width: 100%;
+  height: 10rem;
+}
