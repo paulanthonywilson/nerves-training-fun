@@ -44,6 +44,7 @@ defmodule Fw.Mixfile do
   def deps do
     [
       {:nerves, "~> 0.7", runtime: false},
+      {:wifi, in_umbrella: true},
     ] ++
     deps(@target)
   end
@@ -53,7 +54,8 @@ defmodule Fw.Mixfile do
   def deps(target) do
     [ system(target),
       {:bootloader, "~> 0.1"},
-      {:nerves_runtime, "~> 0.4"}
+      {:nerves_runtime, "~> 0.4"},
+      {:nerves_init_gadget, ">= 0.0.0"},
     ]
   end
 
