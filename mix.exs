@@ -5,7 +5,8 @@ defmodule Sensors.Mixfile do
     [
       apps_path: "apps",
       start_permanent: Mix.env == :prod,
-      deps: deps()
+      deps: deps(),
+      dialyzer: [ignore_warnings: "dialyzer.ignore-warnings"]
     ]
   end
 
