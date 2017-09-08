@@ -21,7 +21,7 @@ defmodule DeviceIO.SensorPoller do
 
   def handle_info(:poll, s) do
     reading = %SensorReading{
-      temperature: :rand.uniform(100),
+      temperature: :rand.uniform(100) + 0.0,
       pressure: 0.0,
       height: 0.0,
       light_level: 0.0,
@@ -32,6 +32,4 @@ defmodule DeviceIO.SensorPoller do
     Process.send_after(self(), :poll, @poll_millis)
     {:noreply, s}
   end
-
-
 end

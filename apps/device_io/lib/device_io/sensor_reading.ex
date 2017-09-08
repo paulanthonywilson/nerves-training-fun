@@ -4,14 +4,14 @@ defmodule DeviceIO.SensorReading do
   to the subscribers.
   """
 
-  @type celsius :: integer
+  @type celsius :: float
   @type pascals :: float
   @type metres :: float
 
 
   @enforce_keys [:temperature, :pressure, :height, :light_level, :time]
   defstruct temperature: nil, pressure: nil, height: nil, light_level: nil, time: nil
-  @type t :: %__MODULE__{temperature: celsius, pressure: pascals, height: metres, light_level: integer, time: DateTime.t}
+  @type t :: %__MODULE__{temperature: celsius, pressure: pascals, height: metres, light_level: float, time: DateTime.t}
 
   @topic :sensor_event
   @registry :device_io_events_registry
