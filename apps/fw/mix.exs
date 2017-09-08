@@ -53,7 +53,8 @@ defmodule Fw.Mixfile do
   # Specify target specific dependencies
   def deps("host"), do: []
   def deps(target) do
-    [ system(target),
+    [
+      system(target),
       {:bootloader, "~> 0.1"},
       {:nerves_runtime, "~> 0.4"},
       {:nerves_init_gadget, ">= 0.0.0"},

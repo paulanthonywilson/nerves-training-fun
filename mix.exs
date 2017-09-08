@@ -15,6 +15,9 @@ defmodule Sensors.Mixfile do
   #
   # Run "mix help deps" for examples and options.
   defp deps do
-    []
+    [
+      {:credo, "~> 0.8.6", only: [:dev, :test]},
+      {:dialyxir, ">= 0.5.1", only: [:dev, :test]},
+    ]
   end
 end

@@ -1,5 +1,6 @@
 defmodule Ui.Application do
   use Application
+  @moduledoc false
 
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
