@@ -8,4 +8,6 @@ config :ui, UiWeb.Endpoint,
 
 config :logger, level: :info
 
+IO.inspect "ui prod"
+
 import_config "prod.secret.exs"

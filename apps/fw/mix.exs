@@ -46,6 +46,7 @@ defmodule Fw.Mixfile do
       {:nerves, "~> 0.7", runtime: false},
       {:wifi, in_umbrella: true},
       {:ui, in_umbrella: true},
+      {:device_io, in_umbrella: true}
     ] ++
     deps(@target)
   end

@@ -3,7 +3,7 @@ defmodule DeviceIO.SensorPoller do
   Polls the sensor every second and broadcasts the events using `DeviceIO.SensorReading`
   """
 
-  alias DeviceIO.SensorReading
+  alias DeviceIO.{SensorReading, Barometer}
 
   use GenServer
 
@@ -15,15 +15,27 @@ defmodule DeviceIO.SensorPoller do
   end
 
   def init(_) do
+    send(self(), :enable_barometer)
     Process.send_after(self(), :poll, @poll_millis)
     {:ok, {}}
   end
 
+  def handle_info(:enable_barometer, s) do
+    Barometer.enable()
+    {:noreply, s}
+  end
+
   def handle_info(:poll, s) do
+    %{
+      temperature: temperature,
+      pressure: pressure,
+      altitude: height,
+    } = Barometer.measure_all()
+
     reading = %SensorReading{
-      temperature: :rand.uniform(100) + 0.0,
-      pressure: 0.0,
-      height: 0.0,
+      temperature: temperature,
+      pressure: pressure,
+      height: height,
       light_level: 0.0,
       time: DateTime.utc_now()
     }

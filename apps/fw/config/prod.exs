@@ -7,6 +7,8 @@ config :nerves_firmware_ssh,
 
 config :logger, level: :info
 
+IO.inspect "hi"
+
 config :bootloader,
   init: [:nerves_runtime, :nerves_init_gadget],
   app: :fw
