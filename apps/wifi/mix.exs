@@ -28,7 +28,7 @@ defmodule Wifi.Mixfile do
     [
       {:nerves_network, "~> 0.3", only: :prod},
       # {:dummy_nerves, git: "https://github.com/CultivateHQ/dummy_nerves.git", only: [:dev, :test]},
-      {:dummy_nerves, path: "/Users/paul/dev/elixir/nerves/dummy_nerves", only: [:dev, :test] },
+      {:dummy_nerves, path: "/Users/paul/dev/elixir/nerves/dummy_nerves", only: [:dev, :test]},
     ]
   end
 end

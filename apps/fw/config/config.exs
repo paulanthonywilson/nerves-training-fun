@@ -4,5 +4,6 @@
 # This configuration file is loaded before any dependency and
 use Mix.Config
 
+require Logger
 
 import_config "#{Mix.env}.exs"

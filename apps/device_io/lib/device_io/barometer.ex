@@ -5,7 +5,7 @@ defmodule DeviceIO.Barometer do
 
   alias ElixirALE.I2C
 
-  @sealevel_pa 101325
+  @sealevel_pa 101_325
 
   @doc """
   Put the BMP280 in normal mode and sample the temperature and
@@ -32,56 +32,61 @@ defmodule DeviceIO.Barometer do
   Read the trimming parameters from the BMP280's non-volatile memory
   """
   def calibration() do
-    <<dig_T1::little-unsigned-size(16),
-      dig_T2::little-signed-size(16),
-      dig_T3::little-signed-size(16),
-      dig_P1::little-unsigned-size(16),
-      dig_P2::little-signed-size(16),
-      dig_P3::little-signed-size(16),
-      dig_P4::little-signed-size(16),
-      dig_P5::little-signed-size(16),
-      dig_P6::little-signed-size(16),
-      dig_P7::little-signed-size(16),
-      dig_P8::little-signed-size(16),
-      dig_P9::little-signed-size(16)>> =
+    <<dig_t1::little-unsigned-size(16),
+      dig_t2::little-signed-size(16),
+      dig_t3::little-signed-size(16),
+      dig_p1::little-unsigned-size(16),
+      dig_p2::little-signed-size(16),
+      dig_p3::little-signed-size(16),
+      dig_p4::little-signed-size(16),
+      dig_p5::little-signed-size(16),
+      dig_p6::little-signed-size(16),
+      dig_p7::little-signed-size(16),
+      dig_p8::little-signed-size(16),
+      dig_p9::little-signed-size(16)>> =
       I2C.write_read(Barometer.I2C, <<0x88>>, 24)
-                            %{dig_T1: dig_T1,
-                              dig_T2: dig_T2,
-                              dig_T3: dig_T3,
-                              dig_P1: dig_P1,
-                              dig_P2: dig_P2,
-                              dig_P3: dig_P3,
-                              dig_P4: dig_P4,
-                              dig_P5: dig_P5,
-                              dig_P6: dig_P6,
-                              dig_P7: dig_P7,
-                              dig_P8: dig_P8,
-                              dig_P9: dig_P9}
+                            %{dig_T1: dig_t1,
+                              dig_T2: dig_t2,
+                              dig_T3: dig_t3,
+                              dig_P1: dig_p1,
+                              dig_P2: dig_p2,
+                              dig_P3: dig_p3,
+                              dig_P4: dig_p4,
+                              dig_P5: dig_p5,
+                              dig_P6: dig_p6,
+                              dig_P7: dig_p7,
+                              dig_P8: dig_p8,
+                              dig_P9: dig_p9}
   end
 
   def calculate_temp(raw_temp, cal) do
-    var1 = (raw_temp/16384 - cal.dig_T1/1024) * cal.dig_T2
-    var2 = (raw_temp/131072 - cal.dig_T1/8192) * (raw_temp/131072 - cal.dig_T1/8192) * cal.dig_T3
-    (var1 + var2) / 5120
+    var1 = (raw_temp / 16_384 - cal.dig_T1 / 1_024) * cal.dig_T2
+    var2 = (raw_temp / 131_072 - cal.dig_T1 / 8_192) * (raw_temp / 131_072 - cal.dig_T1 / 8_192) * cal.dig_T3
+    (var1 + var2) / 5_120
   end
 
   def calculate_temp_and_pressure(raw_temp, raw_pressure, cal) do
-    temp = calculate_temp(raw_temp, cal)
-    t_fine = temp * 5120
+    try do
+      temp = calculate_temp(raw_temp, cal)
+      t_fine = temp * 5120
 
-    var1 = t_fine/2 - 64000
-    var2 = var1 * var1 * cal.dig_P6 / 32768
-    var2 = var2 + var1 * cal.dig_P5 * 2
-    var2 = var2 / 4 + cal.dig_P4 * 65536
-    var1 = (cal.dig_P3 * var1 * var1 / 524288 + cal.dig_P2 * var1) / 524288
-    var1 = (1 + var1/32768) * cal.dig_P1
-    p = 1048576 - raw_pressure
-    p = (p - (var2/4096)) * 6250/var1
-    var1 = cal.dig_P9 * p * p / 2147483648
-    var2 = p * cal.dig_P8 / 32768
-    p = p + (var1 + var2 + cal.dig_P7) / 16
+      var1 = t_fine / 2 - 64_000
+      var2 = var1 * var1 * cal.dig_P6 / 32_768
+      var2 = var2 + var1 * cal.dig_P5 * 2
+      var2 = var2 / 4 + cal.dig_P4 * 65_536
+      var1 = (cal.dig_P3 * var1 * var1 / 524_288 + cal.dig_P2 * var1) / 524_288
+      var1 = (1 + var1 / 32_768) * cal.dig_P1
+      p = 1_048_576 - raw_pressure
+      p = (p - (var2 / 4_096)) * 6_250 / var1
+      var1 = cal.dig_P9 * p * p / 2_147_483_648
+      var2 = p * cal.dig_P8 / 32_768
+      p = p + (var1 + var2 + cal.dig_P7) / 16
 
-    {temp, p}
+      {temp, p}
+    rescue
+      ArithmeticError ->
+        {0.0, 0.0}
+    end
   end
 
   @doc """
@@ -110,7 +115,7 @@ defmodule DeviceIO.Barometer do
   Estimate the altitude in meters.
   """
   def altitude(p) do
-    44330 * (1 - :math.pow(p / @sealevel_pa, 1/5.255))
+    44_330 * (1 - :math.pow(p / @sealevel_pa, 1 / 5.255))
   end
 
   def measure_all() do
@@ -131,6 +136,6 @@ defmodule DeviceIO.Barometer do
     p * 0.00029529983071445
   end
 
-  def meters_to_feet(m), do: 3.2808399 *m
+  def meters_to_feet(m), do: 3.2808399 * m
 
 end
