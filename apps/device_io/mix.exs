@@ -27,6 +27,7 @@ defmodule DeviceIo.Mixfile do
   defp deps do
     [
       {:elixir_ale, ">= 0.0.0", only: :prod},
+      {:grovepi, "~> 0.3", only: :prod},
       {:dummy_nerves, path: "/Users/paul/dev/elixir/nerves/dummy_nerves", only: [:dev, :test]},
     ]
   end

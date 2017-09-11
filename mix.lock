@@ -9,6 +9,7 @@
   "elixir_make": {:hex, :elixir_make, "0.4.0", "992f38fabe705bb45821a728f20914c554b276838433349d4f2341f7a687cddf", [], [], "hexpm"},
   "file_system": {:hex, :file_system, "0.2.1", "c4bec8f187d2aabace4beb890f0d4e468f65ca051593db768e533a274d0df587", [], [], "hexpm"},
   "gettext": {:hex, :gettext, "0.13.1", "5e0daf4e7636d771c4c71ad5f3f53ba09a9ae5c250e1ab9c42ba9edccc476263", [], [], "hexpm"},
+  "grovepi": {:hex, :grovepi, "0.4.1", "0d517f7696d8dc880b9fdd6ecee1ec8b75658c8fc3327e4e54b5376588212c48", [], [{:elixir_ale, "~> 1.0", [hex: :elixir_ale, repo: "hexpm", optional: false]}], "hexpm"},
   "mime": {:hex, :mime, "1.1.0", "01c1d6f4083d8aa5c7b8c246ade95139620ef8effb009edde934e0ec3b28090a", [], [], "hexpm"},
   "nerves": {:hex, :nerves, "0.7.5", "3aa6a336b2ad6c1c9589cc2b577511b3c4c375c1ba6c533ab9f88adb8c21f0c3", [], [{:distillery, "~> 1.4", [hex: :distillery, repo: "hexpm", optional: false]}], "hexpm"},
   "nerves_network": {:hex, :nerves_network, "0.3.4", "c50a36b8263cda2bee18f408287d0f4474f8367702d170864325abbd5d424e4d", [], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}, {:nerves_network_interface, "~> 0.4.0", [hex: :nerves_network_interface, repo: "hexpm", optional: false]}, {:nerves_wpa_supplicant, "~> 0.3.0", [hex: :nerves_wpa_supplicant, repo: "hexpm", optional: false]}, {:system_registry, "~> 0.4", [hex: :system_registry, repo: "hexpm", optional: false]}], "hexpm"},

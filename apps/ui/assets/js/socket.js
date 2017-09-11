@@ -18,12 +18,16 @@ let heightElement = document.getElementById("height")
 
 console.log(timeElement)
 
+let formatNumber = num => {
+  return num.toLocaleString("en-GB", {minimumFractionDigits: 2, maximumFractionDigits: 2})
+}
+
 let displaySensorReading = sensor_reading => {
   timeElement.innerHTML                = sensor_reading.time
-  lightLevelElement.innerHTML          = `${sensor_reading.light_level} light level`
-  temperatureElement.innerHTML         = `${sensor_reading.temperature} ℃`
-  atmosphericPressureElement.innerHTML = `${sensor_reading.pressure} Pa`
-  heightElement.innerHTML              = `${sensor_reading.height} metres`
+  lightLevelElement.innerHTML          = sensor_reading.light_level
+  temperatureElement.innerHTML         = formatNumber(sensor_reading.temperature)
+  atmosphericPressureElement.innerHTML = formatNumber(sensor_reading.pressure)
+  heightElement.innerHTML              = formatNumber(sensor_reading.height)
 }
 
 // Now that you are connected, you can join channels with a topic:
