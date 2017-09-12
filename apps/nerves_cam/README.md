@@ -1,21 +1,8 @@
 # NervesCam
 
-**TODO: Add description**
+Provices a Streamer Plug over the [Picam](https://hex.pm/packages/picam) package. It is lifted from the example application for the ElixirConf 2017 Nerves training.
 
-## Installation
+The `Nerves.Picam` GenServer must be started from the main firmware application. Starting it here leads to errors, probably caused by timing.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `nerves_cam` to your list of dependencies in `mix.exs`:
 
-```elixir
-def deps do
-  [
-    {:nerves_cam, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/nerves_cam](https://hexdocs.pm/nerves_cam).
-
+The error is " raspijpgs: No imagers detected!" and is raised in the Picam C code when none are (indeed) deteted.
