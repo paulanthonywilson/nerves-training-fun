@@ -19,6 +19,8 @@ defmodule UiWeb.Router do
     get "/", PageController, :index
   end
 
+  forward "/video.mjpg",  NervesCam.Streamer
+
   # Other scopes may use custom stacks.
   # scope "/api", UiWeb do
   #   pipe_through :api

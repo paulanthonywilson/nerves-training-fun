@@ -1,7 +1,7 @@
 <div class="row marketing">
   <div>
     <h4>Camera</h4>
-    <p>Goes here</p>
+    <img src="video.mjpg" height="100%">
   </div>
   <div>
     <h4>Sensor</h4>

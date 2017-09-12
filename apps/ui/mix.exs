@@ -37,6 +37,7 @@ defmodule Ui.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:device_io, in_umbrella: true},
+      {:nerves_cam, in_umbrella: true},
     ]
   end
 
